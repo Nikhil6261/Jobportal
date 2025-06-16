@@ -1,7 +1,7 @@
 import mysql2 from 'mysql2/promise'
 
 const db = mysql2.createPool({
-    host: 'maglev.proxy.rlwy.net',
+    host: '${{ MySQL.MYSQL_URL }}',
     user: 'root',
     password: 'Nikhil@6261',
     database: 'userjob',
