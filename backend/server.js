@@ -1,6 +1,5 @@
 import App from './src/app.js'
-import dbconnect from '../backend/src/db/db-config.js'
-
+import dbconnect from './src/db/db-config.js'
 
 
 App.listen(process.env.PORT, () => {
