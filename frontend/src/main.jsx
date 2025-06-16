@@ -4,13 +4,15 @@ import './index.css'
 import App from './App.jsx'
 
 import {BrowserRouter} from 'react-router-dom'
+import {MyProvider } from './context/userContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-
+<MyProvider>
   <BrowserRouter>
   <App />
-
   </BrowserRouter>
+  
+</MyProvider>
 
-  )
+)
