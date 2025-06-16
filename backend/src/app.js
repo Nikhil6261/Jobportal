@@ -8,11 +8,12 @@ env.config()
 const App = express()
 
 App.use(Cors({
-  origin: 'http://localhost:5173',  // ✅ Your React app URL
-  credentials: true                 // ✅ Allow cookies to be sent
+   origin: 'https://jobportal-phi-roan.vercel.app',
+  credentials: true                 
 }))
 
 App.use( cookieParser() ) 
+
 
 App.use(express.json())
 App.use(urlencoded({extended:true}))
