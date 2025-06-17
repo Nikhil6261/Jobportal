@@ -8,6 +8,4 @@ const db = mysql2.createPool({
     port: 14471
 })
 
-// mysql://root:hsmGSaisuloRnobIZKDeGqwCsqqAKXWD@maglev.proxy.rlwy.net:14471/railway
-
 export default db

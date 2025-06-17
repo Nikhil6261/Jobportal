@@ -12,28 +12,57 @@ const COOKIE_OPTIONS = {
 }
 
 
+// export const register = async (req, res) => {
+
+//     const { name, email, password, number, role } = req.body
+
+//     const hashPassword = await bcrypt.hash(password, 10);
+//     const token = JWT.sign({ name, email }, process.env.SECRET)
+
+//     try {
+
+//         const sql = 'INSERT INTO newuser (user_name, email, password,  number ,role , token) VALUES (?, ?, ?, ?, ? ,?)'
+//         const values = [name, email, hashPassword, number, role, token]
+
+//         await mysql.execute(sql, values)
+
+//         res.status(201).
+//             send({ message: 'User registered successfully!' })
+
+//     } catch (error) {
+//         console.error(error)
+//         res.status(500).send('Error fetching users')
+//     }
+// }
+
 export const register = async (req, res) => {
+  const { name, email, password, number, role } = req.body;
 
-    const { name, email, password, number, role } = req.body
+  if (!name || !email || !password || !number || !role) {
+    return res.status(400).send({ message: 'All fields are required.' });
+  }
 
+  try {
     const hashPassword = await bcrypt.hash(password, 10);
-    const token = JWT.sign({ name, email }, process.env.SECRET)
+    const token = JWT.sign({ name, email }, process.env.SECRET);
 
-    try {
+    const sql = `
+      INSERT INTO newuser (user_name, email, password, number, role)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+    const values = [name, email, hashPassword, number, role];
 
-        const sql = 'INSERT INTO newuser (user_name, email, password,  number ,role , token) VALUES (?, ?, ?, ?, ? ,?)'
-        const values = [name, email, hashPassword, number, role, token]
+    await mysql.execute(sql, values);
 
-        await mysql.execute(sql, values)
+    res.status(201).send({ message: 'User registered successfully!' });
+  } catch (error) {
+    console.error("Register error:", error);
+    res.status(500).send({ message: 'Server error while registering user.' });
+  }
+};
 
-        res.status(201).
-            send({ message: 'User registered successfully!' })
 
-    } catch (error) {
-        console.error(error)
-        res.status(500).send('Error fetching users')
-    }
-}
+
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
