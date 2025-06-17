@@ -10,6 +10,8 @@ const Register = () => {
   async function Submithandle(data) {
 
     const newuser = await instanceAxios.post('/user/register', data)
+
+    
     
     Navigate('/login')
     

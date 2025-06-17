@@ -42,14 +42,14 @@ export const register = async (req, res) => {
     return res.status(400).send({ message: 'All fields are required.' });
   }
 
+
   try {
     const hashPassword = await bcrypt.hash(password, 10);
     const token = JWT.sign({ name, email }, process.env.SECRET);
 
-    const sql = `
-      INSERT INTO newuser (user_name, email, password, number, role)
-      VALUES (?, ?, ?, ?, ?)
-    `;
+    console.log('00');
+    
+    const sql = ` INSERT INTO newuser (user_name, email, password, number, role) VALUES (?, ?, ?, ?, ?) `;
     const values = [name, email, hashPassword, number, role];
 
     await mysql.execute(sql, values);
