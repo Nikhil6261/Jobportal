@@ -13,7 +13,10 @@ const Login = () => {
     async function submitHandel(data) {
 
         const logindata = await instanceAxios.post('/user/login', data)
-        const user = logindata.data.user;  
+        const user = logindata.data.user; 
+        
+        setUser(user); 
+        localStorage.setItem("user", JSON.stringify(user));
         
         if (user.role === "jobseeker") {
             

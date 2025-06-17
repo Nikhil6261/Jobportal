@@ -11,7 +11,7 @@ const Navigate = useNavigate()
 
     async function submithandle(data) {
 
-        const res = await instanceAxios.post('/user/job/post', data, { withCredentials: true })
+        const res = await instanceAxios.post('/user/job/post', data, { withCredentials: true } )
 
         if(res.data) { Navigate('/jobdashboard') } 
                 

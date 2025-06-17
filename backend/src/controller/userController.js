@@ -36,29 +36,29 @@ const COOKIE_OPTIONS = {
 // }
 
 export const register = async (req, res) => {
-  const { name, email, password, number, role } = req.body;
+    const { name, email, password, number, role } = req.body;
 
-  if (!name || !email || !password || !number || !role) {
-    return res.status(400).send({ message: 'All fields are required.' });
-  }
+    if (!name || !email || !password || !number || !role) {
+        return res.status(400).send({ message: 'All fields are required.' });
+    }
 
 
-  try {
-    const hashPassword = await bcrypt.hash(password, 10);
-    const token = JWT.sign({ name, email }, process.env.SECRET);
+    try {
+        const hashPassword = await bcrypt.hash(password, 10);
+        const token = JWT.sign({ name, email }, process.env.SECRET);
 
-    console.log('00');
-    
-    const sql = ` INSERT INTO newuser (user_name, email, password, number, role) VALUES (?, ?, ?, ?, ?) `;
-    const values = [name, email, hashPassword, number, role];
+        console.log('00');
 
-    await mysql.execute(sql, values);
+        const sql = ` INSERT INTO newuser (user_name, email, password, number, role) VALUES (?, ?, ?, ?, ?) `;
+        const values = [name, email, hashPassword, number, role];
 
-    res.status(201).send({ message: 'User registered successfully!' });
-  } catch (error) {
-    console.error("Register error:", error);
-    res.status(500).send({ message: 'Server error while registering user.' });
-  }
+        await mysql.execute(sql, values);
+
+        res.status(201).send({ message: 'User registered successfully!' });
+    } catch (error) {
+        console.error("Register error:", error);
+        res.status(500).send({ message: 'Server error while registering user.' });
+    }
 };
 
 
@@ -130,20 +130,36 @@ export const jobdata = async (req, res) => {
 
 }
 
-
 export const getjobdata = async (req, res) => {
+    const { id } = req.body;
 
     try {
-        const sql = ' select * from job_posts '
+        const [jobs] = await mysql.query('SELECT * FROM job_posts WHERE id = ?', [id]);
 
-        const value= await mysql.query(sql)
-        
-        res.send(value).status(201)
+        console.log("Fetched Jobs:", jobs);
 
+        res.status(200).json(jobs); // Always respond with rows only
     } catch (err) {
-        res.send(err).status(401);
-
+        console.error("Error in getjobdata:", err);
+        res.status(500).send("Server Error");
     }
 
+};
 
-}
+export const getjobdetail = async (req, res) => {
+    
+
+try {
+        const [jobs] = await mysql.query('SELECT * FROM job_posts ' );
+
+        console.log("Fetched Jobs:", jobs);
+
+        res.status(200).json(jobs); // Always respond with rows only
+    } catch (err) {
+        console.error("Error in getjobdata:", err);
+        res.status(500).send("Server Error");
+    }
+
+};
+
+

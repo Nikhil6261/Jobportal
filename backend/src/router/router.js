@@ -1,5 +1,5 @@
 import express from 'express'
-import { jobdata, login, register , getjobdata } from '../controller/userController.js'
+import { jobdata, login, register , getjobdata, getjobdetail } from '../controller/userController.js'
 import { verifyToken } from '../controller/middleware.js'
 
 const Router = express.Router()
@@ -18,6 +18,8 @@ Router.get('/jobdashboard', verifyToken, (req, res) => {
 
 Router.post('/job/post', verifyToken ,jobdata )
 
-Router.get('/post', getjobdata)
+Router.post('/post', getjobdata)
+
+Router.get('/postuser', getjobdetail)
 
 export default Router
