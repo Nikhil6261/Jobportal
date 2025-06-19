@@ -1,7 +1,7 @@
 import axios from 'axios'
 
  const  axiosApi  =  axios.create({ 
-       baseURL : "mysql://root:hsmGSaisuloRnobIZKDeGqwCsqqAKXWD@mysql.railway.internal:3306/railway" ,
+       baseURL :"https://jobportal-production-dc4d.up.railway.app/"  ,
        withCredentials:true
     })
 
