@@ -1,7 +1,7 @@
 import axios from 'axios'
 
  const  axiosApi  =  axios.create({ 
-       baseURL :"https://jobportal-production-dc4d.up.railway.app/"  ,
+       baseURL :"jobportal-production-e3da.up.railway.app"  ,
        withCredentials:true
     })
 
