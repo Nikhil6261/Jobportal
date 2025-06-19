@@ -8,7 +8,7 @@ env.config()
 const App = express()
 
 App.use(Cors({
-   origin: 'http://localhost:5173 ',
+   origin: 'jobportal-phi-roan.vercel.app',
   credentials: true                 
 }))
 
