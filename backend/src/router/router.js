@@ -4,6 +4,10 @@ import { verifyToken } from '../controller/middleware.js'
 
 const Router = express.Router()
 
+Router.get('/', (req,res)=>{
+res.send("appliction is runing ")
+
+})
 Router.post('/register', register)
 Router.post('/login', login)
 

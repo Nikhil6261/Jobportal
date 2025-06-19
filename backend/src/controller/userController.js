@@ -35,6 +35,8 @@ const COOKIE_OPTIONS = {
 //     }
 // }
 
+
+
 export const register = async (req, res) => {
     const { name, email, password, number, role } = req.body;
 
