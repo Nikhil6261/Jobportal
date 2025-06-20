@@ -40,20 +40,24 @@ const COOKIE_OPTIONS = {
 export const register = async (req, res) => {
     const { name, email, password, number, role } = req.body;
 
+    console.log('hello');
+    
     if (!name || !email || !password || !number || !role) {
         return res.status(400).send({ message: 'All fields are required.' });
     }
-
-
+    
+    console.log('hello2');
+    
     try {
         const hashPassword = await bcrypt.hash(password, 10);
         const token = JWT.sign({ name, email }, process.env.SECRET);
-
-        console.log('00');
-
+        console.log('hello3');
+        
+        
         const sql = ` INSERT INTO newuser (user_name, email, password, number, role) VALUES (?, ?, ?, ?, ?) `;
+        console.log('4');
         const values = [name, email, hashPassword, number, role];
-
+        
         await mysql.execute(sql, values);
 
         res.status(201).send({ message: 'User registered successfully!' });

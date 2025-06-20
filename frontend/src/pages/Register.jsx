@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import instanceAxios from '../api/ApiAxios'
+import axios from 'axios'
 
 const Register = () => {
   const { register, handleSubmit, reset } = useForm()
@@ -9,7 +10,7 @@ const Register = () => {
 
   async function Submithandle(data) {
 
-    const newuser = await instanceAxios.post('/user/register', data)
+    const newuser = await axios.post('jobportal-production-e3da.up.railway.app/user/register', data)
 
     
     
