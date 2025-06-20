@@ -6,11 +6,10 @@ import  cookieParser from 'cookie-parser'
 env.config()
 
 const App = express()
-
-const allowedOrigins = ['http://localhost:5173', 'https://your-project.vercel.app' ];
+ 
 
 App.use(Cors({
-   origin: allowedOrigins,
+   origin: 'https://your-project.vercel.app',
   credentials: true                 
 }))
 
