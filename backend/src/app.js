@@ -7,7 +7,7 @@ env.config()
 
 const App = express()
 
-const allowedOrigins = ['http://localhost:5173', 'https://your-project.vercel.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://your-project.vercel.app' ];
 
 App.use(Cors({
    origin: allowedOrigins,
@@ -18,7 +18,7 @@ App.use( cookieParser() )
 
 
 App.use(express.json())
-App.use(urlencoded({extended:true}))
+App.use(express.urlencoded({extended:true}))
 
 App.use('/user' , Router)
 
